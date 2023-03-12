@@ -103,7 +103,7 @@ router.post(
     fetchuser,
     async (req, res) => {
         try {
-             userid = req.user.id;
+            const userid = req.user.id;
             const user = await User.findById(userid).select("-password");
             res.send(user);
         } catch (error) {
