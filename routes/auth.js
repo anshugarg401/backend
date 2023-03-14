@@ -80,7 +80,7 @@ router.post(
 
       const data = {
         user: {
-          id: user.id,
+          id: user._id,
         },
       };
       const authdata = jwt.sign(data, JWT_SECRET);
@@ -98,13 +98,14 @@ router.post(
 );
 
 // get logged in user details login required
-router.post(
+router.get(
     "/getuser",
     fetchuser,
     async (req, res) => {
         try {
             const userid = req.user.id;
-            const user = await User.findById(userid).select("-password");
+            const user = await User.findById(userid);
+           
             res.send(user);
         } catch (error) {
             
